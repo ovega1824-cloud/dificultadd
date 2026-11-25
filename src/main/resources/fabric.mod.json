@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "id": "dificultad",
+  "version": "${version}",
+  "name": "Dificultad",
+  "description": "Palo de dificultad: cambios progresivos, eventos aleatorios, comandos con temporizador y zona que se cierra.",
+  "authors": [],
+  "license": "All-Rights-Reserved",
+  "environment": "*",
+  "entrypoints": {
+    "main": ["com.dificultad.DificultadMod"],
+    "client": ["com.dificultad.client.DificultadClient"]
+  },
+  "depends": {
+    "fabricloader": ">=0.16.0",
+    "minecraft": "~1.21.1",
+    "java": ">=21",
+    "fabric-api": "*"
+  }
+}
