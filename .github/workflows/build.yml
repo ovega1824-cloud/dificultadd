@@ -1,0 +1,38 @@
+name: Build mod
+
+on:
+  push:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+
+      - name: Build
+        run: |
+          chmod +x gradlew
+          ./gradlew build --no-daemon
+
+      - name: Guardar .jar como artefacto
+        uses: actions/upload-artifact@v4
+        with:
+          name: dificultad-jar
+          path: build/libs/dificultad-*[0-9].jar
+
+      - name: Publicar .jar en Releases
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: build-${{ github.run_number }}
+          name: Dificultad (build ${{ github.run_number }})
+          files: build/libs/dificultad-*[0-9].jar
